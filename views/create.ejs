@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="/css/jquery.rateyo.css">
+    <link rel="stylesheet" href="/css/jqcloud.min.css">
+    <link rel="stylesheet" href="/css/bars-movie.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fontawesome-stars-o.css">
+    <link rel="stylesheet" href="/css/dropzone.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <script src="/js/jquery.barrating.js"></script>
+    <script src="/js/jquery.dropdown.js"></script>
+    <script src="/js/dropzone.js"></script>
+    <!-- <script src="js/jquery.filedrop.js"></script> -->
+    <script src="/js/fastclick.js"></script>
+    <script src="/js/ejsnew.js"></script>
+    <script src="/js/create.js"></script>
+    <script src="/js/header.js"></script>
+</head>
+
+<body>
+    <header>
+        <% include ./partials/header %>
+        <% include ./partials/modal-login %>
+    </header>
+    <div class="body">
+        <header class="header create hidden">
+            <div class="reps-hint text-md text-overflow">You will receive <span class="text-danger">0</span> Rep points.</div>
+        </header>
+        <div class="user-review-edit center-block">
+            <div class="company-info">
+                <img width="100" height="100" src="img/logo/nokia.jpg" alt="">
+                <div class="info">
+                    <h5 class="title text-info"><%=company.name%></h5>
+                    <p class="content"><%=company.desc%></p>
+                </div>
+            </div>
+            <fieldset>
+                <h5 class="divider">The experience you share will benefit others. Thank you!</h5>
+                <h6>Your overall rating of this company</h6>
+                <div class="rate stars stars-overall">
+                    <h6 class="text-danger hidden"><i class="fa fa-warning text-lg"></i> Rate overall experience</h6>
+                    <select id="rate-overall" autocomplete="off">
+                        <option value=""></option>
+                        <option value="1" data-html="Terrible"></option>
+                        <option value="2" data-html="Poor"></option>
+                        <option value="3" data-html="Average"></option>
+                        <option value="4" data-html="Very good"></option>
+                        <option value="5" data-html="Excellent"></option>
+                    </select>
+                    <span class="label bg-primary your-rating hidden">
+                        <span class="value"></span>&nbsp;
+                        <a href="#" class="clear-rating hidden"><i class="fa fa-times-circle"></i></a>
+                    </span>
+                    <p class="text-sm text-danger hidden">This field is required!</p>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6 col-md-12">
+                            <h6><i class="fa fa-phone text-lg"></i> Phone Support</h6>
+                            <span class="tooltip hover">This is clickable</span>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Time on hold</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-TimeOnHold" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="forever"></option>
+                                        <option value="2" data-html="long time"></option>
+                                        <option value="3" data-html="ok time"></option>
+                                        <option value="4" data-html="short time"></option>
+                                        <option value="5" data-html="quick service"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Language fluency</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-LanguageFluency" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="didn't understand a word" data-width="2x"></option>
+                                        <option value="3" data-html="some words but strong accent" data-width="2x"></option>
+                                        <option value="5" data-html="EZ to understand" data-width="2x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Human answered</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-HumanAnswered" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="Um, no" data-width="4x"></option>
+                                        <option value="5" data-html="Yes" data-width="4x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Transfered alot</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-TransferedAlot" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="Total disaster"></option>
+                                        <option value="2" data-html="Run around"></option>
+                                        <option value="3" data-html="Like a hot potato"></option>
+                                        <option value="4" data-html="1 or 2 times"></option>
+                                        <option value="5" data-html="Not transfered"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-12">
+                            <h6><i class="fa fa-sitemap text-lg"></i> Website</h6>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Easy to find desired product</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-EasytoFindDesiredProduct" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="Exremley difficult"></option>
+                                        <option value="2" data-html="Not EZ at all"></option>
+                                        <option value="3" data-html="there were hidden gimicks"></option>
+                                        <option value="4" data-html="It was ok"></option>
+                                        <option value="5" data-html="Found quickly"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Clear information about the product</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-ClearInformationAboutTheProduct" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="Totaly confusing" data-width="2x"></option>
+                                        <option value="3" data-html="Eventually understood" data-width="2x"></option>
+                                        <option value="5" data-html="Easy to understand" data-width="2x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Annoying popups</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-AnnoyingPopups" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1.25" data-html="Couldn't even use the site" data-width="1x"></option>
+                                        <option value="2.5" data-html="Very bad" data-width="1x"></option>
+                                        <option value="3.75" data-html="There was but won't complain" data-width="1x"></option>
+                                        <option value="5" data-html="none" data-width="1x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-12">
+                            <h6><i class="fa fa-group text-lg"></i> Representative</h6>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Knowledgeable</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-Knowledgeable" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1.25" data-html="They knew nothing" data-width="1x"></option>
+                                        <option value="2.5" data-html="Very confusing" data-width="1x"></option>
+                                        <option value="3.75" data-html="Still a little confused" data-width="1x"></option>
+                                        <option value="5" data-html="Enlightened" data-width="1x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Prompteness</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-Prompteness" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="Lots of silence" data-width="2x"></option>
+                                        <option value="3" data-html="On hold too many times" data-width="2x"></option>
+                                        <option value="5" data-html="Very quick" data-width="2x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Friendlyness</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-Friendlyness" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1.25" data-html="Grrr" data-width="1x"></option>
+                                        <option value="2.5" data-html="They didn't like me" data-width="1x"></option>
+                                        <option value="3.75" data-html="We're cool" data-width="1x"></option>
+                                        <option value="5" data-html="Such a pleasure" data-width="1x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-12">
+                            <h6><i class="fa fa-truck text-lg"></i> Shipping</h6>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Arrived on time</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-ArrivedonTime" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="Never came" data-width="2x"></option>
+                                        <option value="3" data-html="Very slow" data-width="2x"></option>
+                                        <option value="5" data-html="On time" data-width="2x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Arrived intact</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-ArriveIntact" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1.25" data-html="Item broken" data-width="1x"></option>
+                                        <option value="2.5" data-html="Small dents or scratches" data-width="1x"></option>
+                                        <option value="3.75" data-html="Shipping package broke" data-width="1x"></option>
+                                        <option value="5" data-html="Pristine condition" data-width="1x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Shipping price</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-ShippingPrice" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="Free" data-width="2x"></option>
+                                        <option value="3" data-html="Reasonable price" data-width="2x"></option>
+                                        <option value="5" data-html="Over priced" data-width="2x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-12">
+                            <h6><i class="fa fa-handshake-o text-lg"></i> Conflict Resolution</h6>
+                            <div class="sub-option clearfix">
+                                <div class="label left">How did they handle a problem</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-HowDidTheyHandleaProblem" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="They didn't care" data-width="2x"></option>
+                                        <option value="3" data-html="They met me half way" data-width="2x"></option>
+                                        <option value="5" data-html="They made everything right" data-width="2x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Refund</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-Refund" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1.25" data-html="No refund" data-width="1x"></option>
+                                        <option value="2.5" data-html="Very difficult" data-width="1x"></option>
+                                        <option value="3.75" data-html="Parital refund" data-width="1x"></option>
+                                        <option value="5" data-html="Easy to get refund" data-width="1x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sub-option clearfix">
+                                <div class="label left">Return shipping</div>
+                                <div class="right">
+                                    <select name="rating" id="specific-ReturnShipping" autocomplete="off">
+                                        <option value=""></option>
+                                        <option value="1" data-html="Not free" data-width="4x"></option>
+                                        <option value="5" data-html="Free" data-width="4x"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="divider">Provide more info</h5>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6 col-md-12">
+                            <div class="padder-b">
+                                <h6 class="h6">Review title</h6>
+                                <span class="h6 text-danger hidden"><i class="fa fa-warning text-lg"></i> Your review title</span>
+                                <input type="text" name="title" placeholder="Overview of your experience" />
+                                <p class="text-sm text-danger hidden">This field is required!</p>
+                            </div>
+                            <div class="padder-b-lg">
+                                <h6>Review text</h6>
+                                <span class="h6 text-danger hidden"><i class="fa fa-warning text-lg"></i> Your review text</span>
+                                <textarea name="content" rows="7" placeholder="Let people know your experience"></textarea>
+                                <p class="text-sm text-danger hidden">This field is required!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 col-md-12">
+                            <h6><i class="fa fa-smile-o text-lg text-success"></i> Click on positive words to share about (optional)</h6>
+                            <div class="tags container positive padder-b-md">
+                                <a class="tag">• Afordable</a>
+                                <a class="tag">• Awesome</a>
+                                <a class="tag">• Easy returns</a>
+                                <a class="tag">• Caring</a>
+                                <a class="tag">• Great products</a>
+                                <a class="tag">• Good service</a>
+                                <a class="tag">• Respect</a>
+                                <a class="tag">• Happy</a>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-12">
+                            <h6><i class="fa fa-frown-o text-lg text-warning"></i> Click on negtive words to share about (optional)</h6>
+                            <div class="tags container negtive padder-b-lg">
+                                <a class="tag">• Scam</a>
+                                <a class="tag">• No refund</a>
+                                <a class="tag">• Bad</a>
+                                <a class="tag">• Rude</a>
+                                <a class="tag">• Disgusted</a>
+                                <a class="tag">• Pushy</a>
+                                <a class="tag">• Expensive</a>
+                                <a class="tag">• Difficult</a>
+                                <a class="tag">• Angry</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="divider">Do you have photos to share? like a receipt or pic of the item. (optional)</h5>
+                <div id="addPhoto" class="m-b-lg dropzone">
+                    <!-- <button id="photoUpload" class="btn btn-success btn-md">Add a photo</button>
+                    <div id="previews" class="padder-t-md">
+                        <div id="preview-template" class="inline padder-r-sm">
+                            <span class="preview"><img data-dz-thumbnail /></span>
+                            <div class="file-upload-progress">
+                                <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                    <div class="bar bg-success" style="width:0%;" data-dz-uploadprogress></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+                <button id="submit" class="btn btn-success btn-lg">Submit Your Review</button>
+                <button id="submitFB" class="btn btn-default btn-md m-t-xs">Submit your review and Post to Facebook <i class="fa fa-facebook-official"></i></button>
+            </fieldset>
+        </div>
+    </div>
+</body>
+
+</html>

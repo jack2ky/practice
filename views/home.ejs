@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="css/jquery.rateyo.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery.rateyo.js"></script>
+    <script src="js/jquery.dropdown.js"></script>
+    <script src="js/jquery.visible.min.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/ejsnew.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/home.js"></script>
+    <script>
+      var myUser = <%- JSON.stringify(user) %>;
+
+    </script>
+</head>
+
+<body>
+    <header>
+        <% include ./partials/header %>
+        <% include ./partials/modal-login %>
+    </header>
+    <main class="body">
+        <section id="home">
+            <div class="row">
+                <div class="col-8 col-md-6 col-sm-12 text-center">
+                    <div class="inline text-left">
+                        <h1 class="m-t-lg">Company Reviews and Ratings.</h1>
+                        <h1>Get the Whole Story.</h1>
+                        <p class="text-muted text-lg m-t-xxl">
+                            Search ratings and reviews of over 60,000 companies worldwide. Get the inside scoop and find out what it's really like from people who've actually shopped there.
+                        </p>
+                        <div class="m-t-xxl">
+                            <button class="btn btn-primary btn-lg text-sm m-sm">Write a Review</button>
+                            <button class="btn btn-default btn-lg text-sm m-sm">Learn more</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-6 col-sm-12">
+                    <div class="m text-center">
+                        <img src="img/Phone-Screens.png" alt="" class="animated fadeInDown">
+                    </div>
+                </div>
+            </div>
+            <div class="action bg-primary h3 m-t-xl">
+                <span class="bold">Over 200</span>
+                <span> new reviews are posted in Ranky </span>
+                <span class="bold">in past hours</span>
+            </div>
+        </section>
+        <section id="company">
+            <div class="wrapper center-block">
+                <h2 class="text-center m-b-lg opacity-none">Top Companys</h2>
+                <div class="selector clearfix padder-b-xxs m-b-lg">
+                    <div class="multi-selector home">
+                        <button class="btn-default active">All</button>
+                        <button class="btn-default">Computer</button>
+                        <button class="btn-default">Home and Garden</button>
+                        <button class="btn-default">Sports</button>
+                        <button class="btn-default">Shoes</button>
+                        <button class="btn-default">Clothing</button>
+                        <button class="btn-default">Entertainment</button>
+                        <button class="btn-default">Health</button>
+                        <button class="btn-default">Vehicles</button>
+                        <button class="btn-default">Gifts</button>
+                        <button class="btn-default">Children items</button>
+                        <button class="btn-default">Local Services</button>
+                    </div>
+                    <div class="shape"></div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                    <% companys.forEach(function(company){%>
+                        <div class="col-6 col-lg-4 col-md-6 col-sm-12 m-b-md opacity-none">
+                            <div class="company row no-gutter">
+                                <div class="col-6 col-lg-12">
+                                    <img src="<%= company.screenshot %>" alt="Screen Shot">
+                                </div>
+                                <div class="col-6 col-lg-12">
+                                    <div class="padder-l-sm">
+                                        <h5 class="m-l-sm text-info"><%= company.companyName %></h5>
+                                        <div class="subtitle">
+                                            <div class="m-r-sm" id="<%= company.serialNum %>"></div>
+                                            <div class="text-info m-t-xs"><%= company.reviewsNum %> Reviews</div>
+                                        </div>
+                                        <% company.specifics.forEach(function(specific){%>
+                                            <div class="text-info padder-l-sm padder-b-sm"><%= specific.name %> : <%= specific.average %> %</div>
+                                        <%}) %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <%}) %>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="review">
+            <div class="wrapper center-block">
+                <h2 class="text-center text-white m-b-lg">Recent Reviews</h2>
+                <div class="container">
+                    <div class="row opacity-none">
+                    <% reviews.forEach(function (review) { %>
+                        <div class="col-6 col-md-12 m-b-sm">
+                            <div class="review">
+                                <div class="user">
+                                    <div class="vcenter">
+                                        <img src="<%= review.profileImg %>" width="50" height="50" alt="User Image">
+                                        <div class="vcenter">
+                                            <div class="text-white text-md"><span class="text-sm text-gray">By  </span><%= review.username %></div>
+                                            <div class="text-gray">
+                                                <span>Rep points </span><%= review.repPoints %></div>
+                                        </div>
+                                    </div>
+                                    <div class="vcenter">
+                                        <div class="right">
+                                            <div class="text-gray"><%= review.date %></div>
+                                            <div class="text-gray"><%= review.time %></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="wrapper padder-b-sm">
+                                        <div class="h5 padder-b-sm"><%= review.companyName %></div>
+                                        <div class="title text-info h6 m-b-xs">"<%= review.title %>"</div>
+                                        <div class="stars" id="<%= review.serialNum %>"></div>
+                                        <div class="content text-muted text-block"><%= review.content %></div>
+                                    </div>
+                                    <div class="clearfix padder-b">
+                                        <div class="left"><span class="text-useful">Useful <%= review.useful %></span>  <span class="text-warning">Not useful <%= review.notuseful %></span></div>
+                                    </div>
+                                    <footer class="text-center padder-b padder-t-sm"><a href=""><span class="text-primary">make your review for <%= review.companyName %></span></a>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    <%}) %>
+                    </div>
+                </div>
+                <div class="m-t-lg">
+                    <button id="loadmore" class="center-block btn btn-info btn-lg text-sm">Load More</button>
+                </div>
+            </div>
+        </section>
+        <section id="blog">
+            <div class="wrapper center-block">
+                <h2 class="text-center m-b-xxl">Casual news from Ranky</h2>
+                <div class="container">
+                    <div class="row opacity-none">
+                    <% blogs.forEach(function (blog) { %>
+                        <div class="col-4 col-md-12 m-b-md">
+                            <div class="blog">
+                                <img src="<%= blog.img %>" width="100%" alt="amazon">
+                                <h6 class="m-l-sm text-info"><%= blog.title %></h6>
+                                <div class="content text-muted text-block">
+                                    <%= blog.content %>
+                                </div>
+                                <div class="wrapper">
+                                    <div class="vcenter">
+                                        <div class="date"><%= blog.date %></div>
+                                    </div>
+                                    <div class="vcenter">
+                                        <div class="right">
+                                            <div class="text-info m-r-sm">Read more</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <%}) %>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <div class="engage bg-primary text-center m-t-xl">
+                <h2 class="text-white opacity-none">Tips for your next shopping</h2>
+                <div class="input">
+                    <input type="text" name="username" class="vcenter" placeholder="Your name" />
+                    <input type="email" name="email" class="vcenter" placeholder="E-mail address" />
+                    <button class="btn btn-default btn-lg text-md vcenter">Sign up</button>
+                </div>
+                <p class="text-sm text-muted">Get the lastest reviews & articles</p>
+            </div>
+            <div class="footer text-muted">
+                <div class="wrapper center-block">
+                    <div class="left">Copyright 2017. All rights reserved.</div>
+                    <div class="right">
+                        <span class="tel">+11 222 333 444</span>
+                        <span class="email"> support@thewebsite.com</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>
